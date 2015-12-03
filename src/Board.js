@@ -80,7 +80,7 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       var count = 0;
-      //console.log('rowIndex', rowIndex)
+      console.log('rowIndex', rowIndex)
       // _.each(row, function (piece) {
       //   if( piece === 1) {
       //     count++;
@@ -178,40 +178,63 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
      // console.log('majorDiagonalColumnIndexAtFirstRow', majorDiagonalColumnIndexAtFirstRow);
 
-      //create a diagnoal row variable = 0;
-      var diagonalRow = 0;
-      //create a diagonal column variable  majorDiagonalColumnIndexAtFirstRow
-      var diagonalColumn = majorDiagonalColumnIndexAtFirstRow;
-      var count = 0;
-      var board = this.rows();
+     var column = majorDiagonalColumnIndexAtFirstRow;
+     var board = this.rows();
+     var count = 0; 
+     for(var i = 0; i < board.length; i++) {
+       if(board[i][column] === 1) {
+         count++;
+       }
+       column++; 
+     }
+     console.log('count', count)
+     if ( count > 1) {
+       return true;
+     } else {
+       return false;
+     }
+
+
+
+
+
+
+
+
+    //   //create a diagnoal row variable = 0;
+    //   var diagonalRow = 0;
+    //   //create a diagonal column variable  majorDiagonalColumnIndexAtFirstRow
+    //   var diagonalColumn = majorDiagonalColumnIndexAtFirstRow;
+    //   var count = 0;
+    //   var board = this.rows();
     
 
-      //iterate through each piece of the board
-      for ( var boardRow = 0; boardRow < board.length; boardRow ++ ) {
-        for ( var boardColumn = 0; boardColumn < board.length; boardColumn ++) {
-         //if the piece === 1 && the piece is diagonal
-         var isDiagonal;
-         // if( diagonalRow !== boardRow && diagonalColumn !== boardColumn ) { 
-           isDiagonal = ( boardRow - diagonalRow ) === ( boardColumn - diagonalColumn )  
-         // } else {
-         //  isDiagonal = false;
-         // }
-            // //increment the count 
-           //console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal )
-           if( board[boardRow][boardColumn] === 1 && isDiagonal) {
+    //   //iterate through each piece of the board
+    //   for ( var boardRow = 0; boardRow < board.length; boardRow ++ ) {
+    //     for ( var boardColumn = 0; boardColumn < board.length; boardColumn ++) {
+    //      //if the piece === 1 && the piece is diagonal
+    //      var isDiagonal;
+    //      // if( diagonalRow !== boardRow && diagonalColumn !== boardColumn ) { 
+    //        isDiagonal = ( boardRow - diagonalRow ) === ( boardColumn - diagonalColumn )  
+    //      // } else {
+    //      //  isDiagonal = false;
+    //      // }
+    //         // //increment the count 
+    //        //console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal )
+    //        if( board[boardRow][boardColumn] === 1 && isDiagonal) {
 
-             count++;   
-           }
+    //          count++;   
+    //        }
            
           
-        }
-      }
-     // console.log('count',count)
-    if ( count > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    //     }
+    //   }
+    //  // console.log('count',count)
+    // if ( count > 0) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
       
     },
 
@@ -219,18 +242,26 @@
     hasAnyMajorDiagonalConflicts: function() {
       
      // console.log('this.rows()', this.rows(),'conflict', conflict)
+      // var boardSize = this.rows().length;
+      // //console.log('boardSize', boardSize);
+      // var conflict = false; 
+      // for(var i = ((boardSize - 1) * -1); i < boardSize; i++ ) {
+      //   //console.log('this.hasMajorDiagonalConflictAt.call(this,i)', this.hasMajorDiagonalConflictAt.call(this,i), 'this.rows()',this.rows())
+      //   if(this.hasMajorDiagonalConflictAt(i)) {
+      //     conflict = true; 
+      //   }
+      // }
+      // console.log('this.rows()', this.rows(),'conflict', conflict)
+      // return conflict; 
       var boardSize = this.rows().length;
-      //console.log('boardSize', boardSize);
-      var conflict = false; 
+      var conflict = false;
       for(var i = ((boardSize - 1) * -1); i < boardSize; i++ ) {
-        //console.log('this.hasMajorDiagonalConflictAt.call(this,i)', this.hasMajorDiagonalConflictAt.call(this,i), 'this.rows()',this.rows())
+        // for(var i = 0; i < boardSize; i++) {
         if(this.hasMajorDiagonalConflictAt(i)) {
-          conflict = true; 
+          conflict = true;
         }
       }
-      console.log('this.rows()', this.rows(),'conflict', conflict)
-      return conflict; 
-
+      return conflict;
     },
 
 
