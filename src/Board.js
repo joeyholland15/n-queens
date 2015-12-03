@@ -332,10 +332,10 @@
       var boardSize = this.rows().length;
       var conflict = false;
       
-      for(var i = ((boardSize - 1) * -1); i < boardSize; i++ ) {
+      for( var column = ((boardSize * 2) -1); column >= 0 ; column-- ) {
         // for(var i = 0; i < boardSize; i++) {
-        if(this.hasMinorDiagonalConflictAt(i)) {
-          conflict = true;
+        if(this.hasMinorDiagonalConflictAt(column)) {
+          return  true;
         }
       }
       return conflict;
