@@ -271,58 +271,74 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      //create a diagnoal row variable = 0;
-      var diagonalRow = 0;
-      //create a diagonal column variable  majorDiagonalColumnIndexAtFirstRow
-      var diagonalColumn = 1;
-      var count = 0;
-      var board = [[0,1],[1,0]];
-      //console.log('board after declaration', board)
+    var column = minorDiagonalColumnIndexAtFirstRow;
+     var board = this.rows();
+     var count = 0; 
+     for(var i = 0; i < board.length; i++) {
+       if(board[i][column] === 1) {
+         count++;
+       }
+       column--; 
+     }
+     console.log('count', count)
+     if ( count > 1) {
+       return true;
+     } else {
+       return false;
+     }  
+
+
+
+    //   //create a diagnoal row variable = 0;
+    //   var diagonalRow = 0;
+    //   //create a diagonal column variable  majorDiagonalColumnIndexAtFirstRow
+    //   var diagonalColumn = 1;
+    //   var count = 0;
+    //   var board = [[0,1],[1,0]];
+    //   //console.log('board after declaration', board)
     
 
-      //iterate through each piece of the board
-      for ( var boardRow = 0; boardRow < board.length; boardRow ++ ) {
-        for ( var boardColumn = 0; boardColumn < board.length; boardColumn ++) {
-         //if the piece === 1 && the piece is diagonal
-         var isDiagonal;
-         // if( diagonalRow !== boardRow && diagonalColumn !== boardColumn ) { 
-          console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal, '( boardRow - diagonalRow )', boardRow - diagonalRow, ' (( boardColumn - diagonalColumn )* -1)', (( boardColumn - diagonalColumn )* -1));
-           isDiagonal = ( boardRow - diagonalRow ) === (( boardColumn - diagonalColumn )* -1);  
-         // } else {
-          isDiagonal = false;
-         // }
-            // //increment the count 
-          // console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal )
-           if( board[boardRow][boardColumn] === 1 && isDiagonal) {
+    //   //iterate through each piece of the board
+    //   for ( var boardRow = 0; boardRow < board.length; boardRow ++ ) {
+    //     for ( var boardColumn = 0; boardColumn < board.length; boardColumn ++) {
+    //      //if the piece === 1 && the piece is diagonal
+    //      var isDiagonal;
+    //      // if( diagonalRow !== boardRow && diagonalColumn !== boardColumn ) { 
+    //       console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal, '( boardRow - diagonalRow )', boardRow - diagonalRow, ' (( boardColumn - diagonalColumn )* -1)', (( boardColumn - diagonalColumn )* -1));
+    //        isDiagonal = ( boardRow - diagonalRow ) === (( boardColumn - diagonalColumn )* -1);  
+    //      // } else {
+    //       isDiagonal = false;
+    //      // }
+    //         // //increment the count 
+    //       // console.log('boardRow',boardRow,'boardColumn', boardColumn, 'Board',board, 'board[boardRow][boardColumn]',board[boardRow][boardColumn], 'isDiagonal',isDiagonal )
+    //        if( board[boardRow][boardColumn] === 1 && isDiagonal) {
 
-             count++;   
-           }
+    //          count++;   
+    //        }
            
           
-        }
-      }
-      console.log('count',count)
-    if ( count > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    //     }
+    //   }
+    //   console.log('count',count)
+    // if ( count > 0) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-
       var boardSize = this.rows().length;
-      //console.log('boardSize', boardSize);
-      var conflict = false; 
+      var conflict = false;
+      
       for(var i = ((boardSize - 1) * -1); i < boardSize; i++ ) {
-        //console.log('this.hasMajorDiagonalConflictAt.call(this,i)', this.hasMajorDiagonalConflictAt.call(this,i), 'this.rows()',this.rows())
+        // for(var i = 0; i < boardSize; i++) {
         if(this.hasMinorDiagonalConflictAt(i)) {
-          conflict = true; 
+          conflict = true;
         }
       }
-      // console.log('this.rows()', this.rows(),'conflict', conflict)
-      return conflict; 
+      return conflict;
 
     }
 
