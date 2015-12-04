@@ -118,7 +118,11 @@ window.countNQueensSolutions = function(n) {
   var solution = new Board({n:n}); //fixme
   var solutionCount = 0;
   var board = solution.rows()
- 
+
+  console.log('board')
+  if ( n === 0) {
+    solutionCount ++;
+  }
   //Define findSolution func that takes in a column index input
   var findSolution = function (row) {
     //iterate through board starting row(i) = 0 and column = column input
@@ -143,6 +147,7 @@ window.countNQueensSolutions = function(n) {
       //If solution add to solution conunt
      // console.log('solution')
   };
+  findSolution(0);
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
